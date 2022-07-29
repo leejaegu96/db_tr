@@ -740,12 +740,123 @@ VALUES (
     ,"3"
 )
 ;
-SELECT
-	SdqSeq
-    ,SdqDiv
-    ,SdqKo
-    ,SdqEng
-    ,SdqAnswer
-    ,SdTest_SdtSeq
-FROM SdTestQuestion
+SELECT * FROM SdTestQuestion;
+
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"right"
+    ,"1"
+)
 ;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"fine"
+    ,"2"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"got"
+    ,"3"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"should"
+    ,"4"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"happened"
+    ,"5"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"get"
+    ,"6"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"hurt"
+    ,"7"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"even"
+    ,"8"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"order"
+    ,"9"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"have"
+    ,"10"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"want"
+    ,"11"
+)
+;
+INSERT INTO SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    )
+VALUES (
+	"choices"
+    ,"12"
+)
+;
+
+SELECT * FROM InfrMember;
+SELECT * FROM SdTest;
+SELECT * FROM SdTestQuestion;
+SELECT * FROM SdTestResult;
+
+SELECT * FROM SdWord;
+SELECT * FROM SdFavorite;
+
+

@@ -67,3 +67,32 @@ UPDATE member2 SET
 name= "leejaegu" 
 , nickname="jaeng"
 WHERE seq = "1";
+
+-- where
+
+SELECT * FROM member2
+WHERE 1=1
+-- AND name like 'gu%'
+-- AND name like '%gu'
+AND name like '%gu%'
+;
+
+SELECT * FROM member2
+WHERE 1=1
+-- AND gender = 0
+-- AND gender > 1
+-- AND gender >= 1
+AND gender between 0 and 1
+;
+
+SELECT * FROM member2
+WHERE 1=1
+-- AND nameEng is null
+-- AND nameEng = null
+AND nameEng = ""
+;
+
+SELECT * FROM member2
+WHERE 1=1
+AND nameEng = ""
+;
