@@ -482,3 +482,9 @@ VALUES (
 )
 ;
 SELECT * FROM SdTestQuestion;
+
+INSERT INTO  SdTotalResult (
+	`InfrMember_IfmmSeq`
+    ,`SdDate_SddSeq`
+    ,`SdtrsTotalScore`
+)
