@@ -484,7 +484,36 @@ VALUES (
 SELECT * FROM SdTestQuestion;
 
 INSERT INTO  SdTotalResult (
-	`InfrMember_IfmmSeq`
-    ,`SdDate_SddSeq`
-    ,`SdtrsTotalScore`
+	InfrMember_IfmmSeq
+    ,SdDate_SddSeq
+    ,SdtrsTotalScore
 )
+VALUES (
+	"1"
+    ,"2"
+    ,"3"
+)
+;
+SELECT * FROM SdTotalResult;
+
+INSERT INTO  SdTestResult (
+	SdrsUserAnswer
+    ,SdTestQuestion_Sdqseq
+    ,SdTotalResult_SdtrsSeq
+    ,SdTestNY
+)
+VALUES (
+	"happened"
+    ,"2"
+    ,"1"
+    ,"0"
+)
+;
+
+SELECT * FROM InfrMember;
+SELECT * FROM SdDate;
+SELECT * FROM SdFavorite;
+SELECT * FROM SdTestQuestion;
+SELECT * FROM SdTestResult;
+SELECT * FROM SdTotalResult;
+SELECT * FROM SdWord;
