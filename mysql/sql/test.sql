@@ -517,3 +517,46 @@ SELECT * FROM SdTestQuestion;
 SELECT * FROM SdTestResult;
 SELECT * FROM SdTotalResult;
 SELECT * FROM SdWord;
+
+
+use bigbang;
+
+CREATE TABLE IF NOT EXISTS `bigbang`.`infrCodeGroup` (
+  `ifcgSeq` INT NOT NULL AUTO_INCREMENT,
+  `ifcgName` VARCHAR(45) NULL,
+  `ifcgUseNy` TINYINT NULL,
+  `ifcgOrder` TINYINT NULL,
+  PRIMARY KEY (`ifcgSeq`))
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `bigbang`.`infrCode` (
+  `ifcdSeq` INT NOT NULL AUTO_INCREMENT,
+  `ifcdName` VARCHAR(45) NULL,
+  `ifcdUseNy` TINYINT NULL,
+  `ifcdOrder` TINYINT NULL,
+  `infrCodeGroup_ifcgSeq` INT NOT NULL,
+  PRIMARY KEY (`ifcdSeq`),
+  INDEX `fk_infrCode_infrCodeGroup1_idx` (`infrCodeGroup_ifcgSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_infrCode_infrCodeGroup1`
+    FOREIGN KEY (`infrCodeGroup_ifcgSeq`)
+    REFERENCES `bigbang`.`infrCodeGroup` (`ifcgSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM bigbang.infrCodeGroup;
+SELECT * FROM bigbang.infrCode;
+-- 	첫번째 seq pk풀어서 123, 1234로 바꾸자!
