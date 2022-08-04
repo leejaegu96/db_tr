@@ -559,4 +559,3 @@ ENGINE = InnoDB
 
 SELECT * FROM bigbang.infrCodeGroup;
 SELECT * FROM bigbang.infrCode;
--- 	첫번째 seq pk풀어서 123, 1234로 바꾸자!
