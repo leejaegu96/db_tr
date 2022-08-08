@@ -16,30 +16,32 @@ select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmP
 
 -- 오늘의 단어
 select
-	a.SddDateChoice
-    ,b.SdwWord
-    ,b.SdwMean
-    ,b.SdwExample
+    a.SdwWord
+    ,a.SdwMean
+    ,a.SdwExample
+    ,b.SddDateChoice
 
-from SdDate a 
-inner join SdWord b on b.SdDate_SddSeq=a.SddSeq
-where a.SddDateChoice = "2022-07-25"
+from SdWord a
+inner join SdDate b on b.SddSeq=a.SdDate_SddSeq
+where 1=1 
+	and b.SddDateChoice = "2022-07-25"
 ;
 
 -- 나만의 단어장
 select
-	a.SddDateChoice
-    ,b.SdwWord
-    ,b.SdwMean
-    ,b.SdwExample
-    ,c.IfmmName
-    ,d.SdfDelNY
+	a.SdfDelNY
+    ,b.IfmmName
+    ,c.SdwWord
+    ,c.SdwMean
+    ,c.SdwExample
+	,d.SddDateChoice
     
-from SdDate a 
-inner join SdWord b on b.SdDate_SddSeq=a.SddSeq
-inner join SdFavorite d on d.SdWord_SdwSeq=b.SdwSeq
-inner join InfrMember c on c.IfmmSeq=d.InfrMember_IfmmSeq
-where a.SddDateChoice = "2022-07-25" and c.IfmmName = "Leejaegu"
+from  SdFavorite a
+inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
+inner join SdWord c on c.SdwSeq=a.SdWord_SdwSeq
+inner join SdDate d on d.SddSeq=c.SdDate_SddSeq
+where 1=1
+	and b.IfmmName="Leejaegu"
 ;
 
 -- 테스트 목록
@@ -60,19 +62,43 @@ inner join SdTestQuestion b on b.SdDate_SddSeq = a.SddSeq
 inner join SdTestResult c on c.SdTestQuestion_Sdqseq = b.SdqSeq 
 inner join SdTotalResult d on d.SdtrsSeq = c.SdTotalResult_SdtrsSeq
 inner join InfrMember e on e.IfmmSeq = d.InfrMember_IfmmSeq
-where 
-	a.SddDateChoice = "2022-07-25" and e.IfmmName = "Leejaegu"
+where 1=1
+	and a.SddDateChoice = "2022-07-25" and e.IfmmName = "Leejaegu"
+;
+
+select
+	a.SdqNumber
+    ,a.SdqKo
+    ,a.SdqEng
+    ,a.SdqAnswer
+    ,b.SdrsUserAnswer
+    ,b.SdTestNY
+    ,c.SdtrsTotalScore
+    ,d.SddDateChoice
+    ,e.IfmmName
+    ,e.IfmmEmail
+    
+from SdTestQuestion a
+inner join SdTestResult b on b.SdTestQuestion_Sdqseq=a.SdqSeq
+inner join SdTotalResult c on c.SdtrsSeq=b.SdTotalResult_SdtrsSeq
+inner join SdDate d on d.SddSeq=c.SdDate_SddSeq
+inner join InfrMember e on e.IfmmSeq=c.InfrMember_IfmmSeq
+
+where 1=1
+	and d.SddDateChoice = "2022-07-25" and e.IfmmName = "Leejaegu"
 ;
 
 
 -- 랭킹 목록
 select
-	a.IfmmName
-    ,b.SdtrsTotalScore
+	a.SdtrsTotalScore
+    ,b.IfmmName
     ,c.SddDateChoice
-from InfrMember a
-inner join SdTotalResult b on b.InfrMember_IfmmSeq=a.IfmmSeq
-inner join SdDate c on c.SddSeq=b.SdDate_SddSeq
+from SdTotalResult a
+inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
+inner join SdDate c on c.SddSeq=a.SdDate_SddSeq
+where 1=1
+	and c.SddDateChoice="2022-07-25"
 ;
 
 
