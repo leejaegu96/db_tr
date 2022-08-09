@@ -45,26 +45,6 @@ where 1=1
 ;
 
 -- 테스트 목록
-select
-	a.SddDateChoice
-    ,e.IfmmName
-    ,e.IfmmEmail
-    ,b.SdqNumber
-    ,b.SdqKo
-    ,b.SdqEng
-    ,b.SdqAnswer
-    ,c.SdrsUserAnswer
-    ,c.SdTestNY
-    ,d.SdtrsTotalScore
-    
-from SdDate a
-inner join SdTestQuestion b on b.SdDate_SddSeq = a.SddSeq
-inner join SdTestResult c on c.SdTestQuestion_Sdqseq = b.SdqSeq 
-inner join SdTotalResult d on d.SdtrsSeq = c.SdTotalResult_SdtrsSeq
-inner join InfrMember e on e.IfmmSeq = d.InfrMember_IfmmSeq
-where 1=1
-	and a.SddDateChoice = "2022-07-25" and e.IfmmName = "Leejaegu"
-;
 
 select
 	a.SdqNumber
@@ -92,13 +72,18 @@ where 1=1
 -- 랭킹 목록
 select
 	a.SdtrsTotalScore
+    ,a.InfrMember_IfmmSeq
     ,b.IfmmName
     ,c.SddDateChoice
+    -- 개인의 주간합산 구해옴
+    -- (select sum(SdtrsTotalScore) from SdTotalResult where 아이디, 기간) as alice.3
 from SdTotalResult a
 inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
 inner join SdDate c on c.SddSeq=a.SdDate_SddSeq
 where 1=1
 	and c.SddDateChoice="2022-07-25"
+    -- 주단위 검색조건 필요.2 between
+-- 순서 정하는 쿼리 : order 로 시작함.4
 ;
 
 
