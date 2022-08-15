@@ -75,8 +75,12 @@ select
     ,a.InfrMember_IfmmSeq
     ,b.IfmmName
     ,c.SddDateChoice
-    -- 개인의 주간합산 구해옴
-    -- (select sum(SdtrsTotalScore) from SdTotalResult where 아이디, 기간) as alice.3
+    (Select 
+		sum(SdtrsTotalScore) 
+	from SdTotalResult 
+    where a.IfmmEmail, c.SddDateChoice)
+    as SdtrsTotalScore, 
+    
 from SdTotalResult a
 inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
 inner join SdDate c on c.SddSeq=a.SdDate_SddSeq
