@@ -75,17 +75,19 @@ select
     ,a.InfrMember_IfmmSeq
     ,b.IfmmName
     ,c.SddDateChoice
-    (Select 
-		sum(SdtrsTotalScore) 
-	from SdTotalResult 
-    where a.IfmmEmail, c.SddDateChoice)
-    as SdtrsTotalScore, 
+    `(select 
+		SUM(SdtrsTotalScore)
+		from SdTotalResult a
+		where 1=1
+			a.IfmmEmail = "worncjfrn@naver.com")
+		as SdTotalResult a`
     
 from SdTotalResult a
 inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
 inner join SdDate c on c.SddSeq=a.SdDate_SddSeq
 where 1=1
-	and c.SddDateChoice="2022-07-25"
+	and SddDateChoice between '2022-07-25' and '2022-07-27'
+    -- c.SddDateChoice="2022-07-25"
     -- 주단위 검색조건 필요.2 between
 -- 순서 정하는 쿼리 : order 로 시작함.4
 ;
