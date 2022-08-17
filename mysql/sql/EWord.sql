@@ -71,30 +71,45 @@ where 1=1
 
 -- 랭킹 목록
 select
-	a.SdtrsTotalScore
-	,a.InfrMember_IfmmSeq
-    ,b.IfmmName
-    -- ,c.SddDateChoice
-    ,( select 
-		SUM(aa.SdtrsTotalScore)
-		from SdTotalResult aa
-		where 1=1 
-        and aa.InfrMember_IfmmSeq=b.IfmmSeq
-		and c.SddDateChoice between "2022-07-25" and "2022-07-27"
-        )
-		as UserScore
+	-- 
+	a.InfrMember_IfmmSeq
+    ,(select aa.IfmmName from InfrMember aa where 1=1 and aa.IfmmSeq = a.InfrMember_IfmmSeq) as name
+    ,a.SdtrsTotalScore
+   ,sum(a.SdtrsRotalScore) as sum
     
 from SdTotalResult a
-inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
-inner join SdDate c on c.SddSeq=a.SdDate_SddSeq
+	join SdDate b on b.SddSeq = a.SdDate_SddSeq
 where 1=1
-	-- and c.SddDateChoice between "2022-07-25" and "2022-07-27"
-    -- and c.SddDateChoice="2022-07-25"
-    -- 주단위 검색조건 필요.2 between
--- order by
-	-- UserScore desc
-    -- ,IfmmName 
--- 순서 정하는 쿼리 : order 로 시작함.4
+	and b.SddDateChoice between "2022-07-25" and "2022-07-27"
+group by a.InfrMember_IfmmSeq
+order by sum desc
 ;
 
 
+
+-- 연습
+
+select
+	a.IfmmName
+    ,a.IfmmEmail
+    ,a.IfmmGender
+    ,a.IfmmPhone
+    ,sum(b.SdtrsTotalScore) as sum
+from InfrMember a
+inner join SdTotalResult b on b.InfrMember_IfmmSeq=a.IfmmSeq
+where 1=1
+	and a.IfmmPhone like '%1111%'
+-- group by a.IfmmName
+union all
+select
+	a.IfmmName
+    ,a.IfmmEmail
+    ,a.IfmmGender
+    ,a.IfmmPhone
+    ,sum(b.SdtrsTotalScore) as sum
+from InfrMember a
+inner join SdTotalResult b on b.InfrMember_IfmmSeq=a.IfmmSeq
+where 1=1
+	and a.IfmmPhone like '%2222%'
+-- group by a.IfmmName
+;
