@@ -548,10 +548,46 @@ ENGINE = InnoDB
 
 
 
+CREATE TABLE IF NOT EXISTS `bigbang`.`InfrMemberUploaded` (
+  `Seq` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` TINYINT NULL,
+  `defaultNy` TINYINT NULL,
+  `sort` TINYINT NULL,
+  `originalName` VARCHAR(100) NULL,
+  `uuidName` VARCHAR(100) NULL,
+  `ext` VARCHAR(45) NULL,
+  `size` BIGINT NULL,
+  `delNy` TINYINT NOT NULL,
+  `pseq` BIGINT NOT NULL,
+  PRIMARY KEY (`Seq`))
+ENGINE = InnoDB
+;
 
-
-
-
+INSERT INTO InfrMemberUploaded(
+	seq
+    ,type
+    ,defaultNy
+    ,sort
+    ,originalName
+    ,uuidName
+    ,ext
+    ,size
+    ,delNy
+    ,pseq
+    )
+VALUES (
+	"1"
+	,"1"
+	,"0"
+    ,"0"
+    ,"leejaegu.png"
+    ,"asdfasdfadfasdf.png"
+    ,"png"
+    ,"121212"
+    ,"0"
+    ,"1"
+)
+;
 
 
 
