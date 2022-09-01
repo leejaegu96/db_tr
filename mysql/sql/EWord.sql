@@ -10,6 +10,13 @@ from infrCodeGroup a
 inner join infrCode b on infrCodeGroup_ifcgSeq = a.ifcgSeq
 ;
 
+select
+	a.*
+    ,b.*
+from infrCode a
+inner join infrCodeGroup b on a.infrCodeGroup_ifcgSeq = ifcgSeq
+;
+
 -- 로그인
 select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmPassword = "a123456"
 ;
@@ -112,4 +119,13 @@ inner join SdTotalResult b on b.InfrMember_IfmmSeq=a.IfmmSeq
 where 1=1
 	and a.IfmmPhone like '%2222%'
 -- group by a.IfmmName
+;
+
+
+
+select
+	a.ifcgSeq
+    ,(select aa.IfmmName from InfrMember aa where 1=1 and aa.IfmmSeq = a.InfrMember_IfmmSeq) as count
+from infrCodeGroup a
+inner join infrCode b on infrCodeGroup_ifcgSeq = a.ifcgSeq
 ;
