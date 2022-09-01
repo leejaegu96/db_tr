@@ -125,7 +125,6 @@ where 1=1
 
 select
 	a.ifcgSeq
-    ,(select aa.IfmmName from InfrMember aa where 1=1 and aa.IfmmSeq = a.InfrMember_IfmmSeq) as count
+    ,(select count(ifcdName) from infrCode aa where 1=1 and aa.infrCodeGroup_ifcgSeq = a.ifcgSeq) as count
 from infrCodeGroup a
-inner join infrCode b on infrCodeGroup_ifcgSeq = a.ifcgSeq
 ;
