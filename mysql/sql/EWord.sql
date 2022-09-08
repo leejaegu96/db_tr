@@ -128,3 +128,45 @@ select
     ,(select count(ifcdName) from infrCode aa where 1=1 and aa.infrCodeGroup_ifcgSeq = a.ifcgSeq) as count
 from infrCodeGroup a
 ;
+
+INSERT INTO infrCodeGroup (
+	ifcgName
+    ,ifcgEngName
+    ,ifcgUseNy
+    ,ifcgRegDate
+    ,ifcgModDate
+	)
+VALUES (
+	#{ifcgName}
+    ,#{ifcgEngName}
+    ,1
+    ,#{ifcgRegDate}
+    ,#{ifcgModDate}
+)
+    
+
+INSERT INTO InfrMember(
+	IfmmName
+    ,IfmmNickname
+    ,IfmmEmail
+    ,IfmmPassword
+    ,IfmmGender
+    ,IfmmDob
+    ,IfmmPhone
+    ,IfmmProfile
+    ,IfmmMailNY
+    ,IfmmSmsNY
+    )
+VALUES (
+	"Leejaegu"
+	,"Jaeng"
+    ,"worncjfrn@naver.com"
+    ,"a123456"
+    ,"1"
+    ,"19961211"
+    ,"010-0000-0000"
+    ,"a"
+    ,"1"
+    ,"1"
+)
+;
