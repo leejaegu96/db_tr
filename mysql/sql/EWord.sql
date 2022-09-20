@@ -17,6 +17,21 @@ from infrCode a
 inner join infrCodeGroup b on a.infrCodeGroup_ifcgSeq = ifcgSeq
 ;
 
+SELECT 
+	COUNT(*)
+FROM infrCode a
+INNER JOIN infrCodeGroup b on a.infrCodeGroup_ifcgSeq = b.ifcgSeq
+;
+
+SELECT
+			a.*
+			,b.*
+		FROM infrCode a
+		INNER JOIN infrCodeGroup b on a.infrCodeGroup_ifcgSeq = b.ifcgSeq
+		WHERE 1=1
+			AND ifcdSeq
+            ;
+
 -- 로그인
 select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmPassword = "a123456"
 ;
