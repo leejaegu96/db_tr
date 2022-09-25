@@ -15,6 +15,49 @@ CREATE TABLE IF NOT EXISTS `bigbang`.`member2` (
 ENGINE = InnoDB
 ;
 
+CREATE TABLE IF NOT EXISTS `bigbang`.`sdWord` (
+  `sdwSeq` INT NOT NULL AUTO_INCREMENT,
+  `sdwWord` VARCHAR(45) NULL COMMENT '단어',
+  `sdDate_sddSeq` INT NOT NULL,
+  PRIMARY KEY (`sdwSeq`),
+  INDEX `fk_SdWord_SdDate1_idx` (`sdDate_sddSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_SdWord_SdDate1`
+    FOREIGN KEY (`sdDate_sddSeq`)
+    REFERENCES `bigbang`.`sdDate` (`sddSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `bigbang`.`sdwMean` (
+  `sdwmSeq` INT NOT NULL AUTO_INCREMENT,
+  `sdwmPartOfSpeech` VARCHAR(45) NULL,
+  `sdwmContents` VARCHAR(255) NULL,
+  `sdWord_sdwSeq` INT NOT NULL,
+  PRIMARY KEY (`sdwmSeq`),
+  INDEX `fk_sdwMean_sdWord1_idx` (`sdWord_sdwSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_sdwMean_sdWord1`
+    FOREIGN KEY (`sdWord_sdwSeq`)
+    REFERENCES `bigbang`.`sdWord` (`sdwSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+CREATE TABLE IF NOT EXISTS `bigbang`.`sdwExample` (
+  `sdweSeq` INT NOT NULL AUTO_INCREMENT,
+  `sdweContents` VARCHAR(255) NULL,
+  `sdweTranslate` VARCHAR(255) NULL,
+  `sdWord_sdwSeq` INT NOT NULL,
+  PRIMARY KEY (`sdweSeq`),
+  INDEX `fk_sdwExample_sdWord1_idx` (`sdWord_sdwSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_sdwExample_sdWord1`
+    FOREIGN KEY (`sdWord_sdwSeq`)
+    REFERENCES `bigbang`.`sdWord` (`sdwSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
 INSERT INTO member2(
 	seq
     ,name

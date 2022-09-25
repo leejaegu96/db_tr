@@ -38,32 +38,40 @@ select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmP
 
 -- 오늘의 단어
 select
-    a.SdwWord
-    ,a.SdwMean
-    ,a.SdwExample
-    ,b.SddDateChoice
-
-from SdWord a
-inner join SdDate b on b.SddSeq=a.SdDate_SddSeq
+    a.sdwWord
+    ,c.sdwmPartOfSpeech
+    ,c.sdwmContents
+    ,d.sdweContents
+    ,d.sdweTranslate
+    ,b.sddDateChoice
+from sdWord a
+inner join sdDate b on b.sddSeq=a.sdDate_sddSeq
+inner join sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
+inner join sdwExample d on d.sdWord_sdwSeq=a.sdwSeq
 where 1=1 
-	and b.SddDateChoice = "2022-07-25"
+	and b.sddDateChoice = "2022-07-25"
+group by a.sdwWord
 ;
 
 -- 나만의 단어장
 select
-	a.SdfDelNY
-    ,b.IfmmName
-    ,c.SdwWord
-    ,c.SdwMean
-    ,c.SdwExample
-	,d.SddDateChoice
-    
-from  SdFavorite a
-inner join InfrMember b on b.IfmmSeq=a.InfrMember_IfmmSeq
-inner join SdWord c on c.SdwSeq=a.SdWord_SdwSeq
-inner join SdDate d on d.SddSeq=c.SdDate_SddSeq
+	a.sdfDelNY
+    ,b.ifmmName
+    ,c.sdwWord
+    ,e.sdwmPartOfSpeech
+    ,e.sdwmContents
+    ,f.sdweContents
+    ,f.sdweTranslate
+	,d.sddDateChoice
+from  sdFavorite a
+inner join infrMember b on b.ifmmSeq=a.infrMember_ifmmSeq
+inner join sdWord c on c.sdwSeq=a.sdWord_sdwSeq
+inner join sdDate d on d.sddSeq=c.sdDate_sddSeq
+inner join sdwMean e on e.sdWord_sdwSeq=c.sdwSeq
+inner join sdwExample f on f.sdWord_sdwSeq=c.sdwSeq
 where 1=1
-	and b.IfmmName="Leejaegu"
+	and b.ifmmName="Leejaegu"
+group by c.sdwWord
 ;
 
 -- 테스트 목록
