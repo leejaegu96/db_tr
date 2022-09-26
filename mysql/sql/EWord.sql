@@ -37,7 +37,7 @@ select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmP
 ;
 
 -- 오늘의 단어
-select
+select distinct
     a.sdwWord
     ,c.sdwmPartOfSpeech
     ,c.sdwmContents
@@ -47,10 +47,9 @@ select
 from sdWord a
 inner join sdDate b on b.sddSeq=a.sdDate_sddSeq
 inner join sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
-inner join sdwExample d on d.sdWord_sdwSeq=a.sdwSeq
+inner join sdwExample d on d.sdwMean_sdwmSeq=c.sdwmSeq
 where 1=1 
 	and b.sddDateChoice = "2022-07-25"
-group by a.sdwWord
 ;
 
 -- 나만의 단어장
@@ -77,41 +76,54 @@ group by c.sdwWord
 -- 테스트 목록
 
 select
-	a.SdqNumber
-    ,a.SdqKo
-    ,a.SdqEng
-    ,a.SdqAnswer
-    ,b.SdrsUserAnswer
-    ,b.SdTestNY
-    ,c.SdtrsTotalScore
-    ,d.SddDateChoice
-    ,e.IfmmName
-    ,e.IfmmEmail
+	a.sdqNumber
+    ,a.sdqKo
+    ,a.sdqEng
+    ,a.sdqAnswer
+    ,b.sdrsUserAnswer
+    ,b.sdTestNY
+    ,c.sdtrsTotalScore
+    ,d.sddDateChoice
+    ,e.ifmmName
+    ,e.ifmmEmail
     
-from SdTestQuestion a
-inner join SdTestResult b on b.SdTestQuestion_Sdqseq=a.SdqSeq
-inner join SdTotalResult c on c.SdtrsSeq=b.SdTotalResult_SdtrsSeq
-inner join SdDate d on d.SddSeq=c.SdDate_SddSeq
-inner join InfrMember e on e.IfmmSeq=c.InfrMember_IfmmSeq
+from sdTestQuestion a
+inner join sdTestResult b on b.sdTestQuestion_sdqseq=a.sdqSeq
+inner join sdTotalResult c on c.sdtrsSeq=b.sdTotalResult_sdtrsSeq
+inner join sdDate d on d.sddSeq=c.sdDate_sddSeq
+inner join infrMember e on e.ifmmSeq=c.infrMember_ifmmSeq
 
 where 1=1
-	and d.SddDateChoice = "2022-07-25" and e.IfmmName = "Leejaegu"
+	and d.sddDateChoice = "2022-07-25" and e.ifmmName = "Leejaegu"
 ;
 
+-- 테스트 화면
+select
+	a.sdqNumber
+    ,a.sdqKo
+    ,a.sdqEng
+    ,a.sdqAnswer
+    ,b.sddDateChoice
+    
+from sdTestQuestion a
+inner join sdDate b on b.sddSeq=a.sdDate_sddSeq
+where 1=1
+	and b.sddDateChoice = "2022-07-25"
+;
 
 -- 랭킹 목록
 select
 	-- 
-	a.InfrMember_IfmmSeq
-    ,(select aa.IfmmName from InfrMember aa where 1=1 and aa.IfmmSeq = a.InfrMember_IfmmSeq) as name
-    ,a.SdtrsTotalScore
-   ,sum(a.SdtrsRotalScore) as sum
+	a.infrMember_ifmmSeq
+    ,(select aa.ifmmName from infrMember aa where 1=1 and aa.ifmmSeq = a.infrMember_ifmmSeq) as name
+    ,a.sdtrsTotalScore
+   ,sum(a.sdtrsTotalScore) as sum
     
-from SdTotalResult a
-	join SdDate b on b.SddSeq = a.SdDate_SddSeq
+from sdTotalResult a
+	join sdDate b on b.sddSeq = a.sdDate_sddSeq
 where 1=1
-	and b.SddDateChoice between "2022-07-25" and "2022-07-27"
-group by a.InfrMember_IfmmSeq
+	and b.sddDateChoice between "2022-07-25" and "2022-07-27"
+group by a.infrMember_ifmmSeq
 order by sum desc
 ;
 

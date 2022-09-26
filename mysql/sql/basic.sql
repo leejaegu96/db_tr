@@ -47,17 +47,16 @@ CREATE TABLE IF NOT EXISTS `bigbang`.`sdwExample` (
   `sdweSeq` INT NOT NULL AUTO_INCREMENT,
   `sdweContents` VARCHAR(255) NULL,
   `sdweTranslate` VARCHAR(255) NULL,
-  `sdWord_sdwSeq` INT NOT NULL,
+  `sdwMean_sdwmSeq` INT NOT NULL,
   PRIMARY KEY (`sdweSeq`),
-  INDEX `fk_sdwExample_sdWord1_idx` (`sdWord_sdwSeq` ASC) VISIBLE,
-  CONSTRAINT `fk_sdwExample_sdWord1`
-    FOREIGN KEY (`sdWord_sdwSeq`)
-    REFERENCES `bigbang`.`sdWord` (`sdwSeq`)
+  INDEX `fk_sdwExample_sdwMean1_idx` (`sdwMean_sdwmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_sdwExample_sdwMean1`
+    FOREIGN KEY (`sdwMean_sdwmSeq`)
+    REFERENCES `bigbang`.`sdwMean` (`sdwmSeq`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 ;
-
 INSERT INTO member2(
 	seq
     ,name
