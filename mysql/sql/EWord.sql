@@ -205,3 +205,51 @@ VALUES (
     ,"1"
 )
 ;
+
+
+
+
+
+use bigbang;
+
+SELECT
+			a.*
+		FROM infrMember a
+		ORDER BY a.ifmmSeq DESC
+        ;
+        
+SELECT
+	a.infrCodeGroup_ifcgSeq
+	,b.ifcgname
+FROM infrCode a
+inner join infrCodeGroup b on b.ifcgSeq = a.infrCodeGroup_ifcgSeq
+;
+
+SELECT
+	a.ifcgName
+    ,a.ifcgSeq
+FROM infrCodeGroup a
+;
+
+SELECT a.ifmmSeq ,a.ifmmId ,a.ifmmPassword ,a.ifmmName FROM infrMember a WHERE 1=1 AND a.ifmmId 
+= 'jaegu12' AND a.ifmmPassword = '77e3c4a17a6730d967667aa96eac53f8043deeb9749ff18defec29c77ff8c7dc' 
+;
+SELECT
+			a.ifmmSeq
+			,a.ifmmEmail
+			,a.ifmmPassword
+			,a.ifmmName
+		FROM infrMember a
+		WHERE 1=1 
+			
+			AND a.ifmmSeq = "144"
+            ;
+            
+            SELECT a.ifmmSeq ,a.ifmmEmail ,a.ifmmPassword ,a.ifmmName FROM infrMember a WHERE 1=1 
+            AND a.ifmmEmail 
+= 'dlworn123@google.com' AND a.ifmmPassword = '2c9fa94a6259a521f6cfba2171f4886688c5d254f7c1f83d1508986185705d5e' 
+AND a.ifmmPassword = '2c9fa94a6259a521f6cfba2171f4886688c5d254f7c1f83d1508986185705d5e' 
+
+
+AND a.ifmmSeq = "144";
+
