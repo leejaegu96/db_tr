@@ -114,18 +114,20 @@ where 1=1
 ;
 
 -- 테스트 최종 수정 ----------------------------------------------------------------------------------------------------------
+-- 테스트
 select
-    SUBSTRING_INDEX(SUBSTRING_INDEX(d.sdweContents, a.sdwWord, 1), a.sdwWord, -1) as first
+	a.sdwNum
+    ,a.sdwWord as answer
+    ,SUBSTRING_INDEX(SUBSTRING_INDEX(d.sdweContents, a.sdwWord, 1), a.sdwWord, -1) as first
 	,SUBSTRING_INDEX(SUBSTRING_INDEX(d.sdweContents, a.sdwWord, 2), a.sdwWord, -1) as second
     ,d.sdweTranslate
-    ,a.sdwWord as answer
     ,b.sddDateChoice
 from sdWord a
 inner join sdDate b on b.sddSeq=a.sdDate_sddSeq
 inner join sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
 inner join sdwExample d on d.sdwMean_sdwmSeq=c.sdwmSeq
 where 1=1 
-	AND b.sddDateChoice = "2022-07-25"
+	
     AND d.sdweDefaultNy = 1
 ;
 
