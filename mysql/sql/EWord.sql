@@ -1,5 +1,26 @@
 use bigbang;
 
+
+		SELECT
+		a.sdwSeq
+		,a.sdwWord
+		,c.sdwmNum
+		,c.sdwmPartOfSpeech
+		,c.sdwmContents
+		,d.sdweContents
+		,d.sdweTranslate
+		,b.sddDateChoice
+		FROM sdWord a
+		INNER JOIN sdDate b on b.sddSeq=a.sdDate_sddSeq
+		INNER JOIN sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
+		INNER JOIN sdwExample d on d.sdwMean_sdwmSeq=c.sdwmSeq
+		WHERE 1=1
+		AND b.sddDateChoice = "2022-07-25"
+        ;
+
+
+
+
 -- ccg / ccgname   cc / ccname -> 1 통신사 1 skt
 select
 	a.ifcgSeq
@@ -57,20 +78,19 @@ select
 	a.sdfDelNY
     ,b.ifmmName
     ,c.sdwWord
+    ,d.sddDateChoice
     ,e.sdwmPartOfSpeech
     ,e.sdwmContents
     ,f.sdweContents
     ,f.sdweTranslate
-	,d.sddDateChoice
 from  sdFavorite a
 inner join infrMember b on b.ifmmSeq=a.infrMember_ifmmSeq
 inner join sdWord c on c.sdwSeq=a.sdWord_sdwSeq
 inner join sdDate d on d.sddSeq=c.sdDate_sddSeq
 inner join sdwMean e on e.sdWord_sdwSeq=c.sdwSeq
-inner join sdwExample f on f.sdWord_sdwSeq=c.sdwSeq
+inner join sdwExample f on f.sdwMean_sdwmSeq=e.sdwmSeq
 where 1=1
-	and b.ifmmName="Leejaegu"
-group by c.sdwWord
+	and b.ifmmSeq="144"
 ;
 
 -- 테스트 목록
