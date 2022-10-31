@@ -1,5 +1,71 @@
 use bigbang;
 
+-- 인덱스 -----------------------------------------------------------------------------------------------
+SHOW INDEX FROM infrMember;
+
+-- 인덱스 추가
+CREATE INDEX abc ON infrMember(ifmmSmsNy, ifmmMailNy )
+;
+-- 인덱스 삭제
+ALTER TABLE infrMember DROP INDEX abc
+;
+-- 인덱스 끝 ----------------------------------------------------------------------------------------------
+-- views ----------------------------------------------------------------------------------------------
+CREATE VIEW sdWordV
+as
+SELECT
+a.sdwSeq
+,a.sdwWord
+,c.sdwmNum
+,c.sdwmPartOfSpeech
+,c.sdwmContents
+,d.sdweContents
+,d.sdweTranslate
+,b.sddDateChoice
+FROM sdWord a
+INNER JOIN sdDate b on b.sddSeq=a.sdDate_sddSeq
+INNER JOIN sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
+INNER JOIN sdwExample d on d.sdwMean_sdwmSeq=c.sdwmSeq
+WHERE 1=1
+;
+
+SELECT * FROM sdWordV
+;
+
+DROP VIEW sdWordV
+;
+-- views 끝 ----------------------------------------------------------------------------------------------
+-- trigger ----------------------------------------------------------------------------------------------
+
+
+-- trigger 끝 ----------------------------------------------------------------------------------------------
+-- function ----------------------------------------------------------------------------------------------
+
+SET GLOBAL log_bin_trust_function_creators = 1
+;
+
+DELIMITER $$
+CREATE FUNCTION getInfrMemberName (
+seq bigint
+) 
+RETURNS varchar(100)
+BEGIN
+	
+    declare rtName varchar(100);
+
+	select
+		ifmmName into rtName
+	from
+		infrMember
+	where 1=1
+		and ifmmSeq = seq
+	;
+
+	RETURN rtName;
+END$$
+DELIMITER ;
+
+-- function 끝 ----------------------------------------------------------------------------------------------
 
 		SELECT
 		a.sdwSeq
@@ -56,6 +122,20 @@ SELECT
 -- 로그인
 select * from InfrMember a where a.IfmmEmail = "worncjfrn@naver.com" and a.IfmmPassword = "a123456"
 ;
+-- 단어
+SELECT
+	a.sdwSeq
+	,a.sdwWord
+	,a.sdwNum
+	,b.sddDateChoice
+    ,c.sdfDelNY
+    ,c.infrMember_ifmmSeq
+	FROM sdWord a
+	INNER JOIN sdDate b on b.sddSeq=a.sdDate_sddSeq
+    INNER JOIN sdFavorite c on c.sdWord_sdwSeq = a.sdwSeq
+	WHERE 1=1
+	AND b.sddDateChoice = "2022-07-25"
+;
 
 -- 오늘의 단어
 select distinct
@@ -93,6 +173,18 @@ where 1=1
 	and b.ifmmSeq="144"
 ;
 
+SELECT
+		a.sdfDelNY
+		,b.ifmmName
+		,c.sdwWord
+		,d.sddDateChoice
+		FROM sdFavorite a
+		inner join infrMember b on b.ifmmSeq=a.infrMember_ifmmSeq
+		inner join sdWord c on c.sdwSeq=a.sdWord_sdwSeq
+		inner join sdDate d on d.sddSeq=c.sdDate_sddSeq
+		WHERE 1=1
+        group by c.sdwWord
+        ;
 -- 테스트 목록
 
 select
