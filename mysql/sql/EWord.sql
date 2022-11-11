@@ -136,8 +136,9 @@ SELECT
 ;
 
 -- 오늘의 단어
-select distinct
+select
     a.sdwWord
+    ,c.sdwmNum
     ,c.sdwmPartOfSpeech
     ,c.sdwmContents
     ,d.sdweContents
@@ -148,7 +149,7 @@ inner join sdDate b on b.sddSeq=a.sdDate_sddSeq
 inner join sdwMean c on c.sdWord_sdwSeq=a.sdwSeq
 inner join sdwExample d on d.sdwMean_sdwmSeq=c.sdwmSeq
 where 1=1 
-	and b.sddDateChoice = "2022-07-25"
+	and a.sdwSeq = "1"
 ;
 
 -- 나만의 단어장
