@@ -1,5 +1,14 @@
 use bigbang;
 
+INSERT INTO sdTotalResult
+SELECT
+	infrMember_ifmmSeq
+    ,sdDate_sddSeq
+    ,sdtrsTotalScore
+FROM sdTotalResult
+WHERE
+	'sdtrsTotalScore' IN (SELECT DEPT_NAME FROM DEPT)
+;
 -- 인덱스 -----------------------------------------------------------------------------------------------
 SHOW INDEX FROM infrMember;
 
@@ -258,8 +267,18 @@ group by a.infrMember_ifmmSeq
 order by sum desc
 ;
 
-
-
+--
+SELECT 
+	b.ifmmSeq
+    ,b.ifmmName
+    ,a.sdtrsTotalScore
+    ,c.sddDateChoice
+from sdTotalResult a
+inner join infrMember b on b.ifmmSeq = a.infrMember_ifmmSeq
+inner join sdDate c on c.sddSeq = a.sdDate_sddSeq
+where 1=1
+AND b.ifmmSeq = 144
+;
 -- 연습
 
 select
